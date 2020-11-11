@@ -11,7 +11,11 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { parseISO } from "date-fns";
-
+// import countries from "i18n-iso-countries";
+// countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+// var nationalities = require("i18n-nationality");
+import nationalities from "i18n-nationality";
+nationalities.registerLocale(require("i18n-nationality/langs/en.json"));
 const useStyles = makeStyles({
   table: {},
 });
@@ -48,8 +52,18 @@ export const ContactsTable = ({ data }) => {
               </TableCell>
               <TableCell>{contact.phone}</TableCell>
               <TableCell>{contact.email}</TableCell>
-              <TableCell>6</TableCell>
-              <TableCell>7</TableCell>
+              <TableCell>
+                <Typography>/{contact.location.country}/</Typography>
+                {contact.location.street.number} {contact.location.street.name}
+                <Typography>
+                  {contact.location.city} {contact.location.postcode}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                {nationalities.getName(contact.nat, "en", {
+                  select: "official",
+                })}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

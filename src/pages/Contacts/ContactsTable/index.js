@@ -1,3 +1,5 @@
+import Chart from "chart.js";
+//=================
 import React from "react";
 import { compareAsc, format } from "date-fns";
 import { makeStyles } from "@material-ui/core/styles";
